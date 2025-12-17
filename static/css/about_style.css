@@ -92,3 +92,23 @@ a:hover {
 .thanks-card a {
   font-size: 18px;
 }
+
+@media (max-width: 768px) {
+  .about-wrapper {
+    padding: 0 15px;
+  }
+
+  .about-wrapper h1 {
+    font-size: 36px;
+  }
+
+  .section-what h2,
+  .section-dev h2,
+  .section-thanks h2 {
+    font-size: 28px;
+  }
+
+  .thanks-grid {
+    grid-template-columns: 1fr;
+  }
+}
