@@ -114,3 +114,148 @@ def get_arcanes(arcane):
     db.session.commit()
     return jsonify(result)
 
+@app.route("/mods/<mod>")
+def get_mods(mod):
+    search_term = mod.strip().lower()
+
+    matches_in_db = db.session.execute(
+        db.select(ModData).filter(ModData.name.ilike(f"%{search_term}%"))
+    ).scalars().all()
+
+    if matches_in_db:
+        results = [{
+            "name": m.name,
+            "type": m.type,
+            "baseDrain": m.baseDrain,
+            "fusionLimit": m.fusionLimit,
+            "rarity": m.rarity,
+            "polarity": m.polarity,
+            "tradable": m.tradable,
+            "releaseDate": m.releaseDate.isoformat() if m.releaseDate else None,
+            "wikiAvailable": m.wikiAvailable,
+            "wikiaUrl": m.wikiaUrl    
+        } for m in matches_in_db]
+        return jsonify(results)
+
+
+    data = load_json("https://raw.githubusercontent.com/WFCD/warframe-items/refs/heads/master/data/json/Mods.json")
+    if not data:
+        return jsonify({"error": "Данные недоступны"}), 503
+
+    matches_external = [m for m in data if search_term in m["name"].lower()]
+    if not matches_external:
+        return jsonify({"error": "Не найдено"}), 404
+
+    cached_results = []
+    for mod_cache in matches_external:
+        existing = db.session.execute(
+            db.select(ModData).filter(func.lower(ModData.name) == mod_cache["name"].lower())
+        ).scalar_one_or_none()
+
+        if not existing:
+            release_date = None
+            if mod_cache.get("releaseDate"):
+                try:
+                    release_date = datetime.strptime(mod_cache["releaseDate"], "%Y-%m-%d").date()
+                except:
+                    pass
+
+            new_mod = ModData(
+                name=mod_cache["name"],
+                type=mod_cache["type"],
+                baseDrain=mod_cache["baseDrain"],
+                fusionLimit=mod_cache["fusionLimit"],
+                rarity=mod_cache["rarity"],
+                polarity=mod_cache["polarity"],
+                tradable=mod_cache["tradable"],
+                releaseDate=release_date,
+                wikiAvailable=mod_cache["wikiAvailable"],
+                wikiaUrl=mod_cache["wikiaUrl"]
+            )
+            db.session.add(new_mod)
+
+        cached_results.append(mod_cache)
+
+    db.session.commit()
+    return jsonify(cached_results)
+
+def load_json(url):
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            return response.json()
+
+    except Exception as e:
+        print(f"Ошибка загрузки {url}: {e}")
+        return {}
+
+
+
+@app.route("/wf/<name>")
+def get_warframe(name):
+    search = name.strip().lower()
+
+    wf = db.session.execute(
+        db.select(WarframeData)
+        .filter(func.lower(WarframeData.WFname) == search)
+    ).scalar_one_or_none()
+
+    if wf:
+        results = [{"name" : wf.WFname,
+                 "type": wf.WFtype,
+                 "health": wf.health,
+                 "shield": wf.shield,
+                 "armor": wf.armor,
+                 "power": wf.power,
+                 "sprintSpeed": wf.sprintSpeed,
+                 "releaseDate": wf.releaseDate,
+                 "description": wf.description,
+                 "abilities" : [
+                     {"name" : wf.abilities1, "description" : wf.description1}, 
+                     {"name" : wf.abilities2, "description" : wf.description2}, 
+                     {"name" : wf.abilities3, "description" : wf.description3}, 
+                     {"name" : wf.abilities4, "description" : wf.description4}
+                     ]
+                }]
+        
+        return jsonify(results)
+
+    
+    data = load_json("https://raw.githubusercontent.com/WFCD/warframe-items/refs/heads/master/data/json/Warframes.json")
+    if not data:
+        return jsonify({"error": "Данные недоступны"}), 503
+    results = [wf for wf in data if search in wf["name"].lower()]
+    if not results:
+        return jsonify({"error": "Не найдено"}), 404
+    wf_cache = results[0]
+    release_date_str = wf_cache.get("releaseDate")
+    if release_date_str:
+        release_date = datetime.strptime(release_date_str, "%Y-%m-%d").date()
+    else:
+        release_date = None
+
+    wf_data = WarframeData(WFname=wf_cache["name"],
+                            WFtype=wf_cache["type"],
+                            health=wf_cache["health"],
+                            shield=wf_cache["shield"],
+                            armor=wf_cache["armor"],
+                            power=wf_cache["power"],
+                            sprintSpeed=wf_cache["sprintSpeed"],
+                            releaseDate=release_date,
+                            description=wf_cache["description"],
+                            abilities1=wf_cache["abilities"][0]["name"],
+                            description1=wf_cache["abilities"][0]["description"],
+                            abilities2=wf_cache["abilities"][1]["name"],
+                            description2=wf_cache["abilities"][1]["description"],
+                            abilities3=wf_cache["abilities"][2]["name"],
+                            description3=wf_cache["abilities"][2]["description"],
+                            abilities4=wf_cache["abilities"][3]["name"],
+                            description4=wf_cache["abilities"][3]["description"])
+    db.session.add(wf_data)
+    db.session.commit()
+    return jsonify([wf_cache])
+
+
+if __name__ == '__main__':
+    port int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=5000)
