@@ -53,3 +53,32 @@ form button:hover,
 .tab-btn:hover {
   background: rgb(44, 44, 44);
 }
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .tabs {
+    position: static;
+    align-self: stretch;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+    border-bottom: 1px solid #48d07a;
+  }
+
+  .tab-btn {
+    display: inline-block;
+    padding: 12px 16px;
+    font-size: 16px;
+    min-width: max-content;
+  }
+
+  .content {
+    padding: 20px;
+    border: none;
+    font-size: 18px;
+  }
+}
