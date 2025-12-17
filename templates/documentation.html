@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Auri" />
+    <meta name="documentation" content="Documentation for Acolyte bot" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/doc_style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>Documentation</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo"><a href="/">
+        <h1>Acolyte bot</h1></a>
+        <a href="/"><img src="/static/images/logo.png"></img></a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/documentation">Documentation</a></li>
+        </ul>
+      </nav>
+      <form class="search-form">
+        <input type="search" placeholder="Search..." />
+        <button type="submit">Search</button>
+      </form>
+    </header>
+    <main>
+      <div class="tabs">
+        <button class="tab-btn active" data-file="intro">Введение</button>
+        <button class="tab-btn" data-file="warframe">
+          Данные об варфреймах
+        </button>
+        <button class="tab-btn" data-file="mods">Данные об модах</button>
+        <button class="tab-btn" data-file="arcane">
+          Данные об мистификаторах
+        </button>
+        <button class="tab-btn" data-file="invasions">
+          Активные вторжения
+        </button>
+        <button class="tab-btn" data-file="voidstorm">Активные бури бездны</button>
+        <button class="tab-btn" data-file="voidmission">Активные разрывы бездны</button>
+        <button class="tab-btn" data-file="voidtraders">Прибытие торговца бездны</button>
+        <button class="tab-btn" data-file="stats">Просмотр статистики</button>
+
+      </div>
+
+      <div class="content">Добро пожаловать в документацию</div>
+    </main>
+    <footer class="footer">
+      <p>Copyright © 2025 by Auri. All rights reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='docs.js') }}"></script>
+    <script src="{{ url_for('static', filename='search.js') }}"></script>
+  </body>
+</html>

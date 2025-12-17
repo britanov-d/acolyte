@@ -1,0 +1,152 @@
+@font-face {
+  font-family: "Pexico";
+  src: url(/static/fonts/Pexico-Regular.woff2);
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: "Pexico";
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  padding: 20px 40px;
+  background: #111;
+
+  border: solid rgb(46, 46, 46);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.nav {
+  margin-left: auto;
+  margin-right: 50px;
+}
+
+ul {
+  display: flex;
+  gap: 30px;
+}
+
+li {
+  list-style: none;
+  font-size: 20px;
+  background-color: #222;
+  border-radius: 6px 6px 6px 6px;
+  padding: 8px 15px;
+  border: 1px solid #48d07a;
+}
+
+a {
+  text-decoration: none;
+  color: #48d07a;
+}
+
+form input[type="search"] {
+  background: #222;
+  font-family: "Pexico";
+  color: #48d07a;
+  padding: 13px 15px;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  width: 220px;
+  border: 1px solid #48d07a;
+}
+
+form input[type="search"]::placeholder {
+  color: #48d07a;
+  font-size: 16px;
+  font-family: "Pexico";
+}
+
+form input[type="search"]:focus {
+  outline-style: none;
+}
+
+form button {
+  font-family: "Pexico";
+  padding: 12px 25px;
+  background: #222;
+  color: #48d07a;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  border: 1px solid #48d07a;
+}
+
+form button:hover {
+  background: rgb(53, 53, 53);
+}
+
+.footer {
+  background: #111;
+  color: #48d07a;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+
+  border: solid rgb(46, 46, 46);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
+.search-form {
+  position: relative;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #111;
+  color: whitesmoke;
+  border-radius: 0 0 8px 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 0 8px #48d07a;
+  border: 1px solid #48d07a;
+  border-top: none;
+}
+
+.suggestion-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 18px;
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  background: #222;
+}
+
+.suggestion-item strong {
+  font-weight: bold;
+  color: #48d07a;
+}

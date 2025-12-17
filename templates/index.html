@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Auri" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <meta name="description" content="Acolyte bot website for Warframe" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <title>Acolyte</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo"><a href="/">
+        <h1>Acolyte bot</h1></a>
+        <a href="/"><img src="/static/images/logo.png"></img></a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/documentation">Documentation</a></li>
+        </ul>
+      </nav>
+      <form class="search-form">
+        <input type="search" placeholder="Search..." />
+        <button type="submit">Search</button>
+      </form>
+    </header>
+    <main>
+      <div class="parse">
+        <div class="input-parse">
+          <h2>&gt;Поле для ввода команды</h2>
+          <input class="parsing" type="search" placeholder="Ввод..." />
+        </div>
+        <div class="output-parse"></div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Copyright © 2025 by Auri. All rights reserved.</p>
+    </footer>
+
+    <script type= "module" src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='search.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+main {
+  flex: 1;
+  display: grid;
+  background: black;
+  color: #48d07a;
+  place-content: center;
+  place-items: center;
+}
+
+a:hover {
+  color: #359457;
+}
+
+.about-wrapper {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.about-wrapper h1 {
+  font-size: 48px;
+  margin-bottom: 60px;
+}
+
+.section-what,
+.section-dev,
+.section-thanks {
+  margin-bottom: 60px;
+}
+
+.section-what h2,
+.section-dev h2,
+.section-thanks h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.section-dev p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.section-what p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.thanks-card p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.tech {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.links {
+  margin-top: 20px;
+}
+
+.thanks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.thanks-card {
+  background: #111;
+  border: 1px solid #48d07a;
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+}
+
+.thanks-card strong {
+  font-size: 22px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.thanks-card p {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.thanks-card a {
+  font-size: 18px;
+}

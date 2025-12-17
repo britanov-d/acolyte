@@ -1,0 +1,128 @@
+main {
+  flex: 1;
+  display: grid;
+  background: black;
+  color: #48d07a;
+  place-content: center;
+  place-items: center;
+}
+
+.parse {
+  width: 100%;
+  max-width: 1300px;
+  color: aliceblue;
+  display: grid;
+  place-items: center;
+  gap: 40px;
+}
+
+.input-parse {
+  margin-top: 40px;
+  background: black;
+  border: 2px solid #1f6839;
+  border-radius: 5px;
+  padding: 20px 60px;
+  color: white;
+  text-align: center;
+  line-height: 2;
+}
+
+@keyframes opacityOutside {
+  from {
+  }
+  to {
+    border: 2px solid #48d07a;
+    box-shadow: 0 0 8px #48d07a;
+  }
+}
+
+.input-parse:focus-within {
+  animation: 0.6s;
+  animation-name: opacityOutside;
+  animation-fill-mode: forwards;
+}
+
+.parsing {
+  background: #222;
+  padding: 10px;
+  color: #48d07a;
+  margin-top: 12px;
+  width: 320px;
+  height: 40px;
+  border: 2px solid #1f6839;
+  border-radius: 2px;
+  font-size: 16px;
+  font-family: "Pexico";
+}
+
+.parsing::placeholder {
+  color: #48d07a;
+  font-size: 16px;
+}
+
+.parsing:focus {
+  outline-style: none;
+  animation: opacityInside 1s ease forwards;
+}
+
+@keyframes opacityInside {
+  from {
+    border: 2px solid #1f6839;
+    box-shadow: 0 0 8px #1f6839;
+  }
+  to {
+    border: 2px solid #48d07a;
+    box-shadow: 0 0 8px #48d07a;
+  }
+}
+
+.output-parse {
+  width: 100%;
+  max-width: 1500px;
+  min-height: 120px;
+  background: black;
+  border: 2px solid #48d07a;
+  opacity: 0;
+  padding: 15px;
+  line-height: 1.7;
+  font-family: "Pexico";
+  font-optical-sizing: auto;
+  font-weight: 300;
+  border-radius: 10px;
+  outline: 2px solid #48d07a;
+  outline-offset: -2px;
+  box-shadow: 0 0 6px #48d07a;
+  margin-bottom: 40px;
+}
+
+.output-parse:not(:empty) {
+  opacity: 1;
+}
+
+a {
+  text-decoration: none;
+  color: #48d07a;
+}
+
+a:hover {
+  color: #359457;
+}
+
+.label {
+  background: #222;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.invasion,
+.voidStorm,
+.abyssGap {
+  padding: 20px 0;
+}
+
+.output-parse > p {
+  margin-bottom: 10px;
+}
+.output-parse > p:last-child {
+  margin-bottom: 0;
+}

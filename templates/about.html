@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/about_style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <meta name="author" content="Auri" />
+    <meta name="description" content="Acolyte – бот по Star Wars" />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+      type="image/x-icon"
+    />
+    <title>About Acolyte</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <a href="/">
+          <h1>Acolyte bot</h1>
+        </a>
+        <a href="/"
+          ><img src="{{ url_for('static', filename='images/logo.png') }}"
+        /></a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/documentation">Documentation</a></li>
+        </ul>
+      </nav>
+      <form class="search-form">
+        <input type="search" placeholder="Search..." />
+        <button type="submit">Search</button>
+      </form>
+    </header>
+
+    <main>
+      <div class="about-wrapper">
+        <h1>О проекте Acolyte</h1>
+
+        <section class="section-what">
+          <h2>Что это за сайт?</h2>
+          <p>
+            Acolyte — Это веб-сайт, который собирает статистику разных событий
+          </p>
+          <p>
+            Просто впиши имя персонажа, название мистификатора или активности
+            <br />
+            бот мгновенно выдаст карточку с описанием и всеми нужными ссылками.
+          </p>
+        </section>
+
+        <section class="section-dev">
+          <h2>Разработчик</h2>
+          <p>Сайт написал <strong>Британов Д.И. (britanov-d)</strong></p>
+
+          <p class="links">
+            <a href="https://github.com/britanov-d" target="_blank"
+              >GitHub: github.com/britanov-d</a
+            ><br />
+            <a href="https://github.com/britanov-d/Acolyte" target="_blank"
+              >Репозиторий: github.com/britanov-d/Acolyte</a
+            >
+          </p>
+        </section>
+
+        <section class="section-thanks">
+          <h2>Особая благодарность</h2>
+          <div class="thanks-grid">
+            <div class="thanks-card">
+              <strong>WFCD (Warframe Community Developers)</strong>
+              <p>
+                Большинство информации об модах, варфреймах и мистификаторах
+                берется сайтом именно отсюда
+              </p>
+              <a href="https://github.com/WFCD" target="_blank">-WFCD GitHub-</a>
+            </div>
+            
+        </section>
+      </div>
+    </main>
+    <footer class="footer">
+      <p>Copyright © 2025 by Auri. All rights reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='search.js') }}"></script>
+  </body>
+</html>
