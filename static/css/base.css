@@ -150,3 +150,55 @@ form button:hover {
   font-weight: bold;
   color: #48d07a;
 }
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  .logo h1 {
+    font-size: 24px;
+  }
+
+  .nav {
+    order: 3;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  ul {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .search-form {
+    width: 100%;
+    order: 2;
+  }
+
+  form input[type="search"] {
+    width: calc(100% - 110px);
+  }
+
+  form button {
+    padding: 13px 20px;
+  }
+
+  .search-suggestions {
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  .input-parse {
+    padding: 15px 30px;
+    width: 90%;
+  }
+
+  .parsing {
+    width: 100%;
+    max-width: 400px;
+  }
+}
