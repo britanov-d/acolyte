@@ -147,3 +147,39 @@ a:hover {
 .output-parse p[style*="color: #ff5555"] {
   font-weight: bold;
 }
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.autocomplete-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #1a1a1a;
+  border-radius: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1000;
+  overflow-y: hidden, scroll;
+  display: none;
+}
+
+.autocomplete-list li {
+  padding: 10px;
+  cursor: pointer;
+  color: aliceblue;
+  display: flex;
+  justify-content: space-between;
+}
+
+.autocomplete-list li:hover {
+  background-color: #333;
+}
+
+.autocomplete-list li .type-tag {
+  color: #888;
+}
