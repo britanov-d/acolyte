@@ -1,8 +1,8 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import requests
 from sqlalchemy import func
 from flask_cors import CORS
-from models import db, create_db, WarframeData, ModData, ArcaneData
+from models import db, create_db, WarframeData, ModData, ArcaneData, ItemIndex
 from datetime import datetime
 
 app = Flask(__name__)
@@ -28,6 +28,26 @@ def about():
 @app.route("/documentation")
 def documentation():
     return render_template("documentation.html")
+
+@app.route("/api/autocomplete")
+def autocomplete():
+    query = request.args.get('q', '').strip().lower()
+    item_type = request.args.get('type')
+
+    if not query or len(query) < 1: 
+        return jsonify([])
+
+    sql_query = db.select(ItemIndex).filter(ItemIndex.name.ilike(f"%{query}%"))
+
+    if item_type:
+        sql_query = sql_query.filter(ItemIndex.item_type == item_type)
+
+    results = db.session.execute(sql_query.limit(10)).scalars().all()
+
+    return jsonify([
+        {"name": item.name, "type": item.item_type} 
+        for item in results
+    ])
 
 @app.route("/worldState/<event>")
 def get_event(event):
@@ -257,6 +277,4 @@ def get_warframe(name):
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=5000, debug=False)
-
+    app.run(port=5000)
