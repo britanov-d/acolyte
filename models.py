@@ -59,6 +59,12 @@ class ArcaneData(db.Model):
     level5: Mapped[dict | None] = mapped_column(JSON, nullable=True)
 
 
+class ItemIndex(db.Model):
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False, index=True)
+    item_type = db.Column(db.String(20), nullable=False)
+
 def create_db(app):
     db.init_app(app)
     with app.app_context():
