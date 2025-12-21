@@ -3,7 +3,6 @@ import requests
 from app import app, db
 from models import ItemIndex
 
-# Ссылки на данные
 URLS = {
     "wf": "https://raw.githubusercontent.com/WFCD/warframe-items/refs/heads/master/data/json/Warframes.json",
     "mods": "https://raw.githubusercontent.com/WFCD/warframe-items/refs/heads/master/data/json/Mods.json",
@@ -12,7 +11,6 @@ URLS = {
 
 def seed_index():
     with app.app_context():
-        # Очищаем таблицу перед обновлением, чтобы не было дублей
         print("Очистка индекса...")
         db.session.query(ItemIndex).delete()
         
@@ -23,12 +21,10 @@ def seed_index():
                 items_batch = []
                 
                 for item in data:
-                    # Проверяем, есть ли имя (игнорируем мусорные данные)
                     if "name" in item:
-                        # Некоторые JSON-ы могут содержать дубликаты (скины и т.д.), можно добавить проверки
                         entry = ItemIndex(
                             name=item["name"],
-                            item_type=item_type # Записываем, куда вести пользователя (wf/mods/arcanes)
+                            item_type=item_type
                         )
                         items_batch.append(entry)
                 
@@ -42,4 +38,5 @@ def seed_index():
         print("База данных имен успешно обновлена!")
 
 if __name__ == "__main__":
+
     seed_index()
